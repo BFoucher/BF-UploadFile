@@ -1,0 +1,33 @@
+{% extends ('::base.html.twig') %}
+
+{% block body %}
+    <div class="well well-lg">
+    <div class="row">
+        <h2 class="text-center">Télécharger un fichier</h2>
+        <p class="col-xs-3 text-right">
+            <i class="fa fa-file fa-7x"></i>
+
+            <br /><span class="text-sbig"><i class="fa fa-hdd-o"></i> {{ file.size }}</span>
+            <br /><span class="label label-primary text-sbig"><i class="fa fa-download"></i> {{ file.download }}</span>
+        </p>
+        <blockquote class="col-xs-8">
+            <h5>{{ file.name  }}</h5>
+            {{ file.mimetype }}<br />
+            {% if file.onedownload %}
+                <span class="label label-primary">1 seul téléchargement autorisé !</span>
+            {% endif %}
+            <br />Expire dans {{ file.lifetimeinterval }}
+        </blockquote>
+        <p class="text-center col-xs-12"><a href="{{ path('download_file',{'slug': file.path}) }}"><span class="btn btn-primary">Download</span></a></p>
+
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+        .text-sbig{
+        font-size: 1.2em;
+        }
+.fa-7x{
+        font-size: 7em;
+}
+{% endblock %}

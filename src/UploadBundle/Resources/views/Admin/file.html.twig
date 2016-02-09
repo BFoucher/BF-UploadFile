@@ -1,0 +1,50 @@
+{% extends ('::base.html.twig') %}
+
+{% block body %}
+<div class="well well-lg">
+    <div class="row">
+        <h2 class="text-center">Fichier</h2>
+        <p class="col-xs-3 text-right">
+            {% if file.active %}
+                <i class="fa fa-file fa-7x text-success"></i>
+            {% else %}
+                <i class="fa fa-file fa-7x text-danger"></i>
+            {% endif %}
+            <br />{{ file.mimetype }}
+            <br /><span class="text-sbig"><i class="fa fa-hdd-o"></i> {{ file.size }}</span>
+            <br /><span class="label label-primary text-sbig"><i class="fa fa-download"></i> {{ file.download }}</span>
+        </p>
+        <blockquote class="col-xs-8">
+            <h5>{{ file.name  }}</h5>
+            <br />
+            <br />Upload par : <strong>{{ file.ip }}</strong>
+            <br />Sha512 : <span class="xsmall">{{ file.sha }}</span>
+            <br />
+            {% if file.expired  %}
+            <span class="text-success">{{ file.lifetimeinterval }}</span>
+            {% else %}
+            <span class="text-danger">{{ file.lifetimeinterval }}</span>
+            {% endif %}
+        </blockquote>
+        <p class="text-center col-xs-12">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('download_file',{'slug': file.path}) }}"><span class="btn btn-primary">Download</span></a>
+            {% endif %}
+            <a href="{{ path('admin_file_delete',{'slug': file.path}) }}"><span class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Supprimer le fichier</span></a>
+        </p>
+
+
+    </div>
+    {% endblock %}
+
+    {% block stylesheets %}
+    .text-sbig{
+    font-size: 1.2em;
+    }
+    .xsmall{
+    font-size: 0.5em;
+    }
+    .fa-7x{
+    font-size: 7em;
+    }
+{% endblock %}

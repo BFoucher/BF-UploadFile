@@ -1,0 +1,26 @@
+{% extends ('::base.html.twig') %}
+{% block title %}Erreur 404{% endblock %}
+{% block body %}
+
+<div class="well well-lg">
+    <div class="row">
+        <h2 class="text-center">Oooopps !</h2>
+        <p class="col-xs-2 col-sm-offset-2 text-danger text-right">
+            <i class="fa fa-exclamation fa-5x"></i>
+        </p>
+        <blockquote class="col-sm-6 col-xs-10">
+            <strong class="text-danger">
+
+                La page que vous demandez n'existe pas.
+            </strong>
+
+            <br />
+
+        </blockquote>
+        <p class="col-xs-12 text-center">
+            <a href="{{ url('upload_file') }}"><span class="btn btn-primary">Retour</span></a>
+        </p>
+
+    </div>
+
+    {% endblock %}

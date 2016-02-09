@@ -1,0 +1,25 @@
+{% extends ('::base.html.twig') %}
+{% block navbar_upload %}active{% endblock %}
+{% block body %}
+
+<div class="well well-lg">
+    <div class="row">
+        <h2 class="text-center">Oooopps !</h2>
+        <p class="col-xs-2 col-sm-offset-2 text-danger text-right">
+            <i class="fa fa-times-circle fa-5x"></i>
+        </p>
+        <blockquote class="col-sm-6 col-xs-10">
+            <strong class="text-danger">
+
+                Fichier Introuvable
+            </strong>
+            <br />
+            Il se peut que la durée de vie du fichier demandé est expirée.
+        </blockquote>
+        <p class="col-xs-12 text-center">
+            <a href="{{ url('upload_file') }}"><span class="btn btn-primary">Retour</span></a>
+        </p>
+
+    </div>
+
+    {% endblock %}

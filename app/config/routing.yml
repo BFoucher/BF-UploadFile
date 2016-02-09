@@ -1,0 +1,13 @@
+upload:
+    resource: "@UploadBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /
+
+admin:
+    resource: "@UploadBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin/
+
+# Seulement "Security" de FoSUser (/login et /logout)
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"

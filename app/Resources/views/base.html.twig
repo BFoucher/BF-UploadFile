@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Share BF!{% endblock %}</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('static/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/bootstrap.theme.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/main.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    {% block css %}{% endblock %}
+    <style>{% block stylesheets %}{% endblock %}</style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('upload_file') }}">Share BF</a>
+        </div>
+
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class=" {% block navbar_upload %}{% endblock %} "><a href="{{ path('upload_file') }}">Upload un Fichier <span class="sr-only">(current)</span></a></li>
+                <li class=" {% block navbar_a_propos %}{% endblock %} "><a href="{{ path('a_propos') }}">A propos</a></li>
+            </ul>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <ul class="nav navbar-nav navbar-right">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="{% block navbar_admin %}{% endblock %}"><a href="{{ path('admin_list_files_active') }}">Admin</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('fos_user_security_logout') }}"title="Logout"><span class="glyphicon glyphicon-log-out text-danger" aria-hidden="true"></span></a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<div class="container{% block fluiContainer %}{% endblock %}">
+    {% block body %}{% endblock %}
+</div>
+<div class="flashMessage">
+{% for flashMessage in app.session.flashbag.get('error') %}
+        <div class= "alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <span class="glyphicon glyphicon-remove"></span> {{ flashMessage }}
+        </div>
+      {% endfor %}
+
+      {% for flashMessage in app.session.flashbag.get('notice') %}
+      <div class= "alert alert-info alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <span class="glyphicon glyphicon-info-sign"></span> {{ flashMessage }}
+      </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+    <div class= "alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <span class="glyphicon glyphicon-ok"></span> {{ flashMessage|raw }}
+    </div>
+  {% endfor %}
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="{{ asset('static/js/bootstrap.min.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>
+
+

@@ -1,0 +1,23 @@
+{% extends ('::base.html.twig') %}
+{% block navbar_a_propos %} active {% endblock %}
+{% block body %}
+    <div class="well well-lg">
+
+
+        <h2>A propos</h2>
+        <p>
+            <strong>share.bfoucher.fr</strong> est site d'upload de fichiers anonyme*. Vous envoyer un fichier quel qu'il soit et vous optenez une url de téléchargement que vous pouvez distribuer à vos amis.
+        </p>
+        <p>
+            Le fichier est stocker de facon anonyme sur le serveur et il est automatiquement détruit après une courte durée choisie au moment de l'upload.</br>
+            Vous avez aussi la possibilité de n'autoriser qu'un seul téléchargement du fichier.
+        </p>
+        <p>
+            Le site est réalisé et hébergé par <a href="https://bfoucher.fr">Baptiste Foucher</a>.
+        </p>
+        <p>
+            Le service est anonyme, il ne nécéssite ni inscription et aucune information personnnelle ne sera demandée. Cependant pour répondre à la législation nous sommes dans l'obligation de garder en mémoire l'ip de l'utilisateur pour chaque fichier envoyer ainsi que la signature numérique (SHA512) du fichier. Le fichier est quand a lui détruit automatiquement suivant les options choisies lors de l'envoi.
+        </p>
+
+    </div>
+{% endblock %}

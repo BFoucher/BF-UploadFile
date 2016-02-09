@@ -1,0 +1,32 @@
+{% block navbar %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('upload_file') }}">Instant Upload</a>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class=" {% block navbar_upload %}{% endblock %} "><a href="{{ path('upload_file') }}">Upload un Fichier <span class="sr-only">(current)</span></a></li>
+                    <li class=" {% block navbar_a_propos %}{% endblock %} "><a href="{{ path('a_propos') }}">A propos</a></li>
+                </ul>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <ul class="nav navbar-nav navbar-right">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="{% block navbar_admin %}{% endblock %}"><a href="{{ path('admin_list_files_active') }}">Admin</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('fos_user_security_logout') }}"title="Logout"><span class="glyphicon glyphicon-log-out text-danger" aria-hidden="true"></span></a></li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+{% endblock %}

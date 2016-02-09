@@ -1,0 +1,41 @@
+{% extends ('::base.html.twig') %}
+
+{% block fluiContainer %}-fluid{% endblock %}
+{% block navbar_admin %}active{% endblock %}
+{% block body %}
+    <div class="col-xs-12 col-md-2">
+        {% block adminMenu %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Liste des fichiers</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <a href="{{ path('admin_list_files_active') }}"><li class="list-group-item list-group-item-text">Fichier Actuel</li></a>
+                        <a href="{{ path('admin_list_files_active',{'filter':'old'}) }}"><li class="list-group-item list-group-item-text">Fichiers à Supprimer</li></a>
+                        <a href="{{ path('admin_list_files_active',{'filter':'archives'}) }}"><li class="list-group-item list-group-item-text">Archives</li></a>
+                    </ul>
+                    <a href="{{ path('admin_files_delete') }}" <span class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Nettoyer les fichiers</span></a>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Statistiques</h2>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-text">Bientot</li>
+                        <li class="list-group-item list-group-item-text">Bientot</li>
+                        <li class="list-group-item list-group-item-text">Bientot</li>
+                    </ul>
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+
+    <div class="col-xs-12 col-md-10">
+        {% block admin %}
+        {% endblock %}
+    </div>
+
+{% endblock %}

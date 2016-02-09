@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1 class="text-center">Uploader un fichier</h1>
+        <form action="#" METHOD="post" >
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+                    <input type="file" class="form-control" name="file">
+                    <br />
+                    <p class="text-center "> Durée de vie du fichier :</p>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            <input type="radio" id="q156" name="quality[25]" value="1" /> Premier Accès
+                        </label>
+                        <label class="btn btn-default active">
+                            <input type="radio" id="q157" name="quality[25]" checked="checked" value="2" /> 5 min
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" id="q158" name="quality[25]" value="3" /> 30 min
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" id="q159" name="quality[25]" value="4" /> 1 H
+                        </label>
+                    </div>
+                    <br />
+                    <br />
+                    <input type="submit" class="btn  btn-success btn-bg" value="Envoyer">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

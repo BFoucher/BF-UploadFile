@@ -1,0 +1,24 @@
+{% extends ('::base.html.twig') %}
+{% block title %}Erreur 403 Forbidden !{% endblock %}
+{% block body %}
+
+<div class="well well-lg">
+    <div class="row">
+        <h2 class="text-center">Oooopps !</h2>
+        <p class="col-xs-2 col-sm-offset-2 text-danger text-right">
+            <i class="fa fa-warning fa-5x"></i>
+        </p>
+        <blockquote class="col-sm-6 col-xs-10">
+            <strong class="text-danger">
+                Accès Interdit.
+            </strong><br />
+            Bien essayé ;) .
+            <br />
+        </blockquote>
+        <p class="col-xs-12 text-center">
+            <a href="{{ url('upload_file') }}"><span class="btn btn-primary">Retour</span></a>
+        </p>
+
+    </div>
+
+    {% endblock %}

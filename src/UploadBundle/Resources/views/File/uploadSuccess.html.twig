@@ -1,0 +1,99 @@
+{% extends ('::base.html.twig') %}
+{% block navbar_upload %}active{% endblock %}
+
+{% block body %}
+    <div class="well well-lg">
+    <div class="row">
+        <h2 class="text-center">Télécharger un fichier</h2>
+        <p class="col-xs-3 text-right">
+            <i class="fa fa-file fa-7x"></i>
+
+            <br /><span class="text-sbig"><i class="fa fa-hdd-o"></i> {{ file.size }}</span>
+            <br /><span class="text-sbig"><i class="fa fa-clock-o"></i> {{ file.lifetimeinterval }}</span>
+        </p>
+        <blockquote class="col-xs-8">
+            <h5>{{ file.name  }}</h5>
+            {{ file.mimetype }}<br />
+            {% if file.onedownload %}
+                <span class="label label-primary">1 seul téléchargement autorisé !</span>
+            {% endif %}
+            <br/>
+            <div class="input-group">
+                    <input id="fileUrl" type="text" class="form-control" value="{{ url('file',{'slug':file.path}) }}" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" title="Copier dans le presse-papier" id="copyButton"><span class="glyphicon glyphicon-copy"></span></button>
+                    </span>
+                </div>
+        </blockquote>
+        <p class="text-center col-xs-12"><a href="{{ path('upload_file') }}"><span class="btn btn-primary">Envoyer un autre fichier</span></a></p>
+
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+        .text-sbig{
+        font-size: 1.2em;
+        }
+.fa-7x{
+        font-size: 7em;
+}
+{% endblock %}
+
+
+{% block javascripts %}
+<script>
+    document.getElementById("copyButton").addEventListener("click", function() {
+        copyToClipboard(document.getElementById("fileUrl"));
+    });
+
+    function copyToClipboard(elem) {
+        // create hidden text element, if it doesn't already exist
+        var targetId = "_hiddenCopyText_";
+        var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+        var origSelectionStart, origSelectionEnd;
+        if (isInput) {
+            // can just use the original source element for the selection and copy
+            target = elem;
+            origSelectionStart = elem.selectionStart;
+            origSelectionEnd = elem.selectionEnd;
+        } else {
+            // must use a temporary form element for the selection and copy
+            target = document.getElementById(targetId);
+            if (!target) {
+                var target = document.createElement("textarea");
+                target.style.position = "absolute";
+                target.style.left = "-9999px";
+                target.style.top = "0";
+                target.id = targetId;
+                document.body.appendChild(target);
+            }
+            target.textContent = elem.textContent;
+        }
+        // select the content
+        var currentFocus = document.activeElement;
+        target.focus();
+        target.setSelectionRange(0, target.value.length);
+
+        // copy the selection
+        var succeed;
+        try {
+            succeed = document.execCommand("copy");
+        } catch(e) {
+            succeed = false;
+        }
+        // restore original focus
+        if (currentFocus && typeof currentFocus.focus === "function") {
+            currentFocus.focus();
+        }
+
+        if (isInput) {
+            // restore prior selection
+            elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+        } else {
+            // clear temporary content
+            target.textContent = "";
+        }
+        return succeed;
+    }
+</script>
+{% endblock %}

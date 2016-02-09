@@ -1,0 +1,8 @@
+.flashMessage{
+    position: absolute;
+    display: inline-block;
+    min-width: 350px;
+    max-width: 500px;
+    right:50px;
+    top:70px;
+}

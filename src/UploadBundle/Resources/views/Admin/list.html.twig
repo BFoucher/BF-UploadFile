@@ -1,0 +1,47 @@
+{% extends ('UploadBundle:Admin:layout.html.twig') %}
+
+{% block admin %}
+
+    <table class="table">
+        <thread>
+            <th>#</th>
+            <th>Fichier</th>
+            <th>ip.</th>
+            <th>Mime Type</th>
+            <th>Size</th>
+            <th><span class="glyphicon glyphicon-save" aria-hidden="true"></span></th>
+            <th>Active</th>
+            <th>Durée</th>
+        </thread>
+        {% for file in files %}
+            <tr>
+                <td><a href="{{ path('admin_file',{'slug':file.path})}}">{{ file.path }}</a></td>
+                <td>{{ file.name }}</td>
+                <td>{{ file.ip }}</td>
+                <td>{{ file.mimetype }}</td>
+                <td>{{ file.size }}</td>
+                <td>{{ file.download }}</td>
+
+                <td>
+                    {% if file.active  %}
+                        <span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-eye-close text-danger" aria-hidden="true"></span>
+                    {% endif %}
+
+                </td>
+                <td>
+                    {% if file.expired  %}
+                        <span class="text-success">{{ file.lifetimeinterval }}</span>
+                    {% else %}
+                        <span class="text-danger">{{ file.lifetimeinterval }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+
+
+{% endblock %}
